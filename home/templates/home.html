@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+
+
+
+    <div class="row pt-3 mt-5 pt-sm-0">
+        {% for pizza in pizzas  %}
+        <div class="col-lg-3 col-md-4 col-sm-6  mb-grid-gutter p-1 m-5 ">
+                <div class="card h-100">
+                <img src="/media/{{pizza.images}}" style="height:180px; width=auto;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{pizza.Pizza_name}}</h5>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="product-price p-1 m-2"><span class="text-accent">₹- {{pizza.price}}  |  Category <br><b style="color:Orange;">{{pizza.category.category_name}}</b> </span></div>
+                       <br><a href="{% url 'add_cart' pizza.uid %}" class="btn btn-success m-1 p-1">Add to Cart<i class="fa-solid fa-cart-shopping"></i><a>
+                        <a href="#" class="btn btn-primary m-1 p-1" alt=""> 20% Discount</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+<script>
+
+
+function createOrder(id){
+
+   axios.post('/api/order' , {'id': id})
+   .then(res =>{
+       console.log(res)
+   })
+
+}
+
+</script>
+
+
+
+
+{% endblock %}
+
